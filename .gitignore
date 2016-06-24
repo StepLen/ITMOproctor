@@ -38,3 +38,6 @@ public/dist/
 
 # Configuration
 /config.json
+
+# WebStorm and other JetBrains IDEs
+.idea
