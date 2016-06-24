@@ -64,25 +64,38 @@ router.get('/schedules', function (req, res) {
 
 
 router.get('/proctor_stat', function (req, res) {
-	var args = {
-		data: {
-			onlyWithInspectors: true
-		}
-	};
-	db.exam.search(args, function (err, data, count) {
-		if (!err && data) {
-			res.json({
-				"total": count,
-				"rows": data
-			});
-		}
-		else {
-			res.json({
-				"total": 0,
-				"rows": []
-			});
-		}
-	});
+	var query = req.query;
+	var User = require('../db/models/user');
+
+	User.aggregate([
+			{
+				$lookup: {
+					from: 'exams',
+					localField: '_id',
+					foreignField: 'inspector',
+					as: 'exams'
+				}
+			},
+			{
+				$match: {
+					role: 2,
+					active: true
+				},
+			},
+			{
+				$project: {
+					firstname: 1,
+					middlename: 1,
+					lastname: 1,
+					exams: 1
+				}
+			}
+		],
+		function (err, data) {
+			res.json({error: err, data: data});
+		});
+
+
 });
 
 module.exports = router;

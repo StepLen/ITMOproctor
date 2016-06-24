@@ -399,13 +399,8 @@ define({
 			"menuItem": "Статистика",
 			"examsStat": "По экзаменам",
 			"proctorsStat": "По прокторам",
-			"fromDate": "C ...",
-			"toDate": "По ...",
-			"statuses": {
-				"1": "Принят",
-				"2": "Прерван",
-				"3": "Пропущен"
-			}
+			"proctorsStatFull": "Статистика по прокторам",
+			"proctorsExams": "Экзамены"
 		},
 		"schedules": {
 			"title": "Расписание",

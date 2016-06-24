@@ -315,7 +315,6 @@ var db = {
 			var page = args.data.page ? Number(args.data.page) - 1 : 0;
 			var fromDate = args.data.from ? moment(args.data.from) : null;
 			var toDate = args.data.to ? moment(args.data.to) : null;
-			var onlyWithInspectors = args.data.onlyWithInspectors ? args.data.onlyWithInspectors : null;
 			var query = {};
 			// Dates
 			if (fromDate && toDate) {
@@ -347,11 +346,7 @@ var db = {
 					}]
 				};
 			}
-
-			if (onlyWithInspectors) {
-				query.inspector = {$exists: true};
-			}
-
+			
 			// If myself
 			if (args.userId && String(args.data.myself) !== 'false') {
 				query.inspector = args.userId;
